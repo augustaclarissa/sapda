@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible Carousel</title>
+  <style>
+    #carousel {
+      overflow: hidden;
+      width: 80%;
+      margin: auto;
+    }
+
+    #carousel-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-section {
+      flex: 0 0 100%;
+      box-sizing: border-box;
+    }
+
+    #prev, #next {
+      cursor: pointer;
+      font-size: 24px;
+      margin: auto 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="carousel" role="region" aria-label="Image Carousel" aria-live="polite">
+  <div id="carousel-container" role="list">
+    <div class="carousel-section" role="listitem">Section 1 Content</div>
+    <div class="carousel-section" role="listitem">Section 2 Content</div>
+    <div class="carousel-section" role="listitem">Section 3 Content</div>
+    <div class="carousel-section" role="listitem">Section 4 Content</div>
+    <div class="carousel-section" role="listitem">Section 5 Content</div>
+    <div class="carousel-section" role="listitem">Section 6 Content</div>
+    <div class="carousel-section" role="listitem">Section 7 Content</div>
+    <div class="carousel-section" role="listitem">Section 8 Content</div>
+    <div class="carousel-section" role="listitem">Section 9 Content</div>
+  </div>
+  <button id="prev" onclick="prevSlide()" aria-label="Previous">&lt;</button>
+  <button id="next" onclick="nextSlide()" aria-label="Next">&gt;</button>
+</div>
+
+<script>
+  const container = document.getElementById('carousel-container');
+  let currentIndex = 0;
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % 9;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + 9) % 9;
+    updateCarousel();
+  }
+
+  function updateCarousel() {
+    container.style.transform = `translateX(${-currentIndex * 100}%)`;
+  }
+</script>
+
+</body>
+</html>
